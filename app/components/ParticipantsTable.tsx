@@ -61,14 +61,12 @@ export const ParticipantsTable = () => {
       });
 
       if (!response.ok) throw new Error('Error al asignar participantes');
-
-      const result = await response.json();
-
       setParticipants(
         participants.map((p) => ({ ...p, status: 'sent' as const }))
       );
-    } catch (err) {
+    } catch (error) {
       setError('Error al enviar los correos');
+      console.log(error);
       setParticipants(
         participants.map((p) => ({ ...p, status: 'idle' as const }))
       );
