@@ -6,19 +6,19 @@ export const Header = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="w-full bg-white p-4 shadow-md dark:bg-gray-800">
-      <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+    <header className="w-full p-6">
+      <div className="max-w-7xl mx-auto flex justify-center items-center relative">
+        <h1 className="text-3xl font-bold text-black dark:text-white">
           Amigo Invisible
         </h1>
         <button
           onClick={toggleTheme}
-          className="rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="absolute right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {theme === 'light' ? (
-            <FaMoon className="text-xl text-gray-800" />
+            <FaMoon className="text-black text-xl" />
           ) : (
-            <FaSun className="text-xl text-white" />
+            <FaSun className="text-white text-xl" />
           )}
         </button>
       </div>

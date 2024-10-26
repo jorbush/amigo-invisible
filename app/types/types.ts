@@ -5,3 +5,8 @@ export interface Participant {
   status: 'idle' | 'sending' | 'sent';
   assignedTo?: string;
 }
+
+export interface Supervisor {
+  name: string;
+  email: string;
+}
