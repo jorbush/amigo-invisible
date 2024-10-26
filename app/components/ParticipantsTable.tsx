@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
-import { FaCheck, FaSpinner, FaTimes } from 'react-icons/fa';
+import { FaCheck, FaSpinner } from 'react-icons/fa';
 import { Participant, Supervisor } from '../types/types';
+import { MdDelete } from "react-icons/md";
 
 export const ParticipantsTable = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -89,16 +90,17 @@ export const ParticipantsTable = () => {
 
       if (!response.ok) throw new Error('Error al asignar participantes');
 
-      const result = await response.json();
+      // const result = await response.json();
 
       setParticipants(
         participants.map((p) => ({ ...p, status: 'sent' as const }))
       );
     } catch (err) {
-      setError('Error al enviar los correos');
-      setParticipants(
-        participants.map((p) => ({ ...p, status: 'idle' as const }))
-      );
+        console.error('Error:', err);
+        setError('Error al enviar los correos');
+        setParticipants(
+            participants.map((p) => ({ ...p, status: 'idle' as const }))
+        );
     }
   };
 
@@ -208,7 +210,7 @@ export const ParticipantsTable = () => {
                     }
                     className="text-red-500 hover:opacity-70"
                   >
-                    <FaTimes />
+                    <MdDelete size={'25px'}/>
                   </button>
                 </td>
               </tr>
@@ -223,7 +225,7 @@ export const ParticipantsTable = () => {
                     onClick={() => setSupervisor(null)}
                     className="text-red-500 hover:opacity-70"
                   >
-                    <FaTimes />
+                    <MdDelete size={'25px'}/>
                   </button>
                 </td>
               </tr>

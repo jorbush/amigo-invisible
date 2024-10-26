@@ -1,5 +1,5 @@
 'use client';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { useTheme } from './ThemeProvider';
 
 export const Header = () => {
@@ -16,9 +16,9 @@ export const Header = () => {
           className="absolute right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {theme === 'light' ? (
-            <FaMoon className="text-black text-xl" />
+            <MdDarkMode className="text-black" size={'25px'}/>
           ) : (
-            <FaSun className="text-white text-xl" />
+            <MdLightMode className="text-white" size={'25px'}/>
           )}
         </button>
       </div>
