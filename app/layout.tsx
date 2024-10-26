@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${font.className} flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900`}
+        className={`${font.className} flex min-h-screen flex-col bg-gray-50 dark:bg-gray-950`}
       >
         <ThemeProvider>
           <Header />

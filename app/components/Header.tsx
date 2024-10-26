@@ -16,12 +16,12 @@ export const Header = () => {
           className="absolute right-0 rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {theme === 'light' ? (
-            <MdDarkMode
+            <MdLightMode
               className="text-black"
               size={'25px'}
             />
           ) : (
-            <MdLightMode
+            <MdDarkMode
               className="text-white"
               size={'25px'}
             />

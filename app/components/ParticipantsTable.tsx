@@ -113,14 +113,14 @@ export const ParticipantsTable = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre"
-            className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
+            className="w-full rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
+            className="w-full rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
           />
           <button
             onClick={addParticipant}
@@ -149,18 +149,18 @@ export const ParticipantsTable = () => {
               value={supervisorName}
               onChange={(e) => setSupervisorName(e.target.value)}
               placeholder="Nombre del supervisor"
-              className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
+              className="md:w-1/3 rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
             />
             <input
               type="email"
               value={supervisorEmail}
               onChange={(e) => setSupervisorEmail(e.target.value)}
               placeholder="Email del supervisor"
-              className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
+              className="md:w-1/3 rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
             />
             <button
               onClick={addSupervisor}
-              className="rounded bg-black px-4 py-2 text-white hover:opacity-90 dark:bg-white dark:text-black"
+              className="md:w-1/3 rounded bg-black px-4 py-2 text-white hover:opacity-90 dark:bg-white dark:text-black"
             >
               Añadir Supervisor
             </button>
