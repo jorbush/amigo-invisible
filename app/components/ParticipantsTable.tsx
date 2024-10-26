@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { FaCheck, FaSpinner } from 'react-icons/fa';
 import { Participant, Supervisor } from '../types/types';
-import { MdDelete } from "react-icons/md";
+import { MdDelete } from 'react-icons/md';
 
 export const ParticipantsTable = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -84,7 +84,7 @@ export const ParticipantsTable = () => {
         },
         body: JSON.stringify({
           participants,
-          supervisor: supervisor || undefined
+          supervisor: supervisor || undefined,
         }),
       });
 
@@ -96,35 +96,35 @@ export const ParticipantsTable = () => {
         participants.map((p) => ({ ...p, status: 'sent' as const }))
       );
     } catch (err) {
-        console.error('Error:', err);
-        setError('Error al enviar los correos');
-        setParticipants(
-            participants.map((p) => ({ ...p, status: 'idle' as const }))
-        );
+      console.error('Error:', err);
+      setError('Error al enviar los correos');
+      setParticipants(
+        participants.map((p) => ({ ...p, status: 'idle' as const }))
+      );
     }
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="mx-auto w-full max-w-4xl p-4">
       <div className="mb-8">
-        <div className="flex flex-col md:flex-row gap-4 mb-4">
+        <div className="mb-4 flex flex-col gap-4 md:flex-row">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre"
-            className="p-2 border rounded bg-white dark:bg-black text-black dark:text-white border-gray-200 dark:border-gray-800"
+            className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="p-2 border rounded bg-white dark:bg-black text-black dark:text-white border-gray-200 dark:border-gray-800"
+            className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
           />
           <button
             onClick={addParticipant}
-            className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-90"
+            className="rounded bg-black px-4 py-2 text-white hover:opacity-90 dark:bg-white dark:text-black"
           >
             Añadir
           </button>
@@ -143,24 +143,24 @@ export const ParticipantsTable = () => {
         </div>
 
         {showSupervisor && (
-          <div className="flex flex-col md:flex-row gap-4 mt-4">
+          <div className="mt-4 flex flex-col gap-4 md:flex-row">
             <input
               type="text"
               value={supervisorName}
               onChange={(e) => setSupervisorName(e.target.value)}
               placeholder="Nombre del supervisor"
-              className="p-2 border rounded bg-white dark:bg-black text-black dark:text-white border-gray-200 dark:border-gray-800"
+              className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
             />
             <input
               type="email"
               value={supervisorEmail}
               onChange={(e) => setSupervisorEmail(e.target.value)}
               placeholder="Email del supervisor"
-              className="p-2 border rounded bg-white dark:bg-black text-black dark:text-white border-gray-200 dark:border-gray-800"
+              className="rounded border border-gray-200 bg-white p-2 text-black dark:border-gray-800 dark:bg-black dark:text-white"
             />
             <button
               onClick={addSupervisor}
-              className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-90"
+              className="rounded bg-black px-4 py-2 text-white hover:opacity-90 dark:bg-white dark:text-black"
             >
               Añadir Supervisor
             </button>
@@ -168,7 +168,7 @@ export const ParticipantsTable = () => {
         )}
 
         {error && (
-          <p className="text-red-500 dark:text-red-400 text-sm mt-2">{error}</p>
+          <p className="mt-2 text-sm text-red-500 dark:text-red-400">{error}</p>
         )}
       </div>
 
@@ -176,10 +176,18 @@ export const ParticipantsTable = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="p-2 text-left text-black dark:text-white">Nombre</th>
-              <th className="p-2 text-left text-black dark:text-white">Email</th>
-              <th className="p-2 text-center text-black dark:text-white">Estado</th>
-              <th className="p-2 text-center text-black dark:text-white">Acciones</th>
+              <th className="p-2 text-left text-black dark:text-white">
+                Nombre
+              </th>
+              <th className="p-2 text-left text-black dark:text-white">
+                Email
+              </th>
+              <th className="p-2 text-center text-black dark:text-white">
+                Estado
+              </th>
+              <th className="p-2 text-center text-black dark:text-white">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -188,11 +196,15 @@ export const ParticipantsTable = () => {
                 key={participant.id}
                 className="border-b border-gray-200 dark:border-gray-800"
               >
-                <td className="p-2 text-black dark:text-white">{participant.name}</td>
-                <td className="p-2 text-black dark:text-white">{participant.email}</td>
+                <td className="p-2 text-black dark:text-white">
+                  {participant.name}
+                </td>
+                <td className="p-2 text-black dark:text-white">
+                  {participant.email}
+                </td>
                 <td className="p-2 text-center">
                   {participant.status === 'sending' && (
-                    <FaSpinner className="animate-spin inline text-black dark:text-white" />
+                    <FaSpinner className="inline animate-spin text-black dark:text-white" />
                   )}
                   {participant.status === 'sent' && (
                     <FaCheck className="inline text-green-500" />
@@ -210,22 +222,26 @@ export const ParticipantsTable = () => {
                     }
                     className="text-red-500 hover:opacity-70"
                   >
-                    <MdDelete size={'25px'}/>
+                    <MdDelete size={'25px'} />
                   </button>
                 </td>
               </tr>
             ))}
             {supervisor && (
-              <tr className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-                <td className="p-2 text-black dark:text-white">{supervisor.name} (Supervisor)</td>
-                <td className="p-2 text-black dark:text-white">{supervisor.email}</td>
+              <tr className="border-b border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
+                <td className="p-2 text-black dark:text-white">
+                  {supervisor.name} (Supervisor)
+                </td>
+                <td className="p-2 text-black dark:text-white">
+                  {supervisor.email}
+                </td>
                 <td className="p-2 text-center">-</td>
                 <td className="p-2 text-center">
                   <button
                     onClick={() => setSupervisor(null)}
                     className="text-red-500 hover:opacity-70"
                   >
-                    <MdDelete size={'25px'}/>
+                    <MdDelete size={'25px'} />
                   </button>
                 </td>
               </tr>
@@ -239,7 +255,7 @@ export const ParticipantsTable = () => {
           <button
             onClick={assignParticipants}
             disabled={participants.length < 3}
-            className="px-6 py-2 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded bg-black px-6 py-2 text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-black"
           >
             Asignar Participantes
           </button>

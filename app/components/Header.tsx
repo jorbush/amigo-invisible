@@ -7,18 +7,24 @@ export const Header = () => {
 
   return (
     <header className="w-full p-6">
-      <div className="max-w-7xl mx-auto flex justify-center items-center relative">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-center">
         <h1 className="text-3xl font-bold text-black dark:text-white">
           Amigo Invisible
         </h1>
         <button
           onClick={toggleTheme}
-          className="absolute right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="absolute right-0 rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {theme === 'light' ? (
-            <MdDarkMode className="text-black" size={'25px'}/>
+            <MdDarkMode
+              className="text-black"
+              size={'25px'}
+            />
           ) : (
-            <MdLightMode className="text-white" size={'25px'}/>
+            <MdLightMode
+              className="text-white"
+              size={'25px'}
+            />
           )}
         </button>
       </div>

@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     }
 
     if (supervisor) {
-        const assignmentsTable = `
+      const assignmentsTable = `
           <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
               <tr style="background-color: #f3f4f6;">
@@ -45,27 +45,31 @@ export async function POST(request: Request) {
               </tr>
             </thead>
             <tbody>
-              ${assignments.map(({ from, to }: { from: Participant; to: Participant }) => `
+              ${assignments
+                .map(
+                  ({ from, to }: { from: Participant; to: Participant }) => `
                 <tr>
                   <td style="padding: 12px; border: 1px solid #e5e7eb;">${from.name} (${from.email})</td>
                   <td style="padding: 12px; border: 1px solid #e5e7eb;">${to.name} (${to.email})</td>
                 </tr>
-              `).join('')}
+              `
+                )
+                .join('')}
             </tbody>
           </table>
         `;
 
-        await transporter.sendMail({
-          from: '"Amigo Invisible" <tu@email.com>',
-          to: supervisor.email,
-          subject: 'Asignaciones del Amigo Invisible',
-          html: `
+      await transporter.sendMail({
+        from: '"Amigo Invisible" <tu@email.com>',
+        to: supervisor.email,
+        subject: 'Asignaciones del Amigo Invisible',
+        html: `
             <h2>Hola ${supervisor.name}</h2>
             <p>Aquí tienes todas las asignaciones del Amigo Invisible:</p>
             ${assignmentsTable}
             <p style="margin-top: 20px;">Por favor, mantén esta información confidencial.</p>
-          `
-        });
+          `,
+      });
     }
 
     return NextResponse.json({ success: true });
