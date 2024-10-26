@@ -10,10 +10,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+      <body className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
         <ThemeProvider>
           <Header />
-          <main className="flex-grow container mx-auto py-8">{children}</main>
+          <main className="container mx-auto flex-grow py-8">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

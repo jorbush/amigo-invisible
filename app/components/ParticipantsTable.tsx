@@ -76,32 +76,32 @@ export const ParticipantsTable = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="mx-auto w-full max-w-4xl p-4">
       <div className="mb-6">
-        <div className="flex flex-col md:flex-row gap-4 mb-4">
+        <div className="mb-4 flex flex-col gap-4 md:flex-row">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre"
-            className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="rounded border p-2 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="rounded border p-2 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
           />
           <button
             onClick={addParticipant}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           >
             Añadir
           </button>
         </div>
         {error && (
-          <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>
+          <p className="text-sm text-red-500 dark:text-red-400">{error}</p>
         )}
       </div>
 
@@ -125,7 +125,7 @@ export const ParticipantsTable = () => {
                 <td className="p-2 dark:text-white">{participant.email}</td>
                 <td className="p-2 text-center">
                   {participant.status === 'sending' && (
-                    <FaSpinner className="animate-spin inline text-blue-500" />
+                    <FaSpinner className="inline animate-spin text-blue-500" />
                   )}
                   {participant.status === 'sent' && (
                     <FaCheck className="inline text-green-500" />
@@ -157,7 +157,7 @@ export const ParticipantsTable = () => {
           <button
             onClick={assignParticipants}
             disabled={participants.length < 3}
-            className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="rounded bg-green-500 px-6 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-gray-400"
           >
             Asignar Participantes
           </button>
