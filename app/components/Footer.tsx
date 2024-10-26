@@ -5,7 +5,7 @@ export const Footer = () => {
         <footer className="w-full p-6">
             <div className="mx-auto flex max-w-7xl items-center justify-center gap-6">
                 <a
-                    href="https://github.com/yourusername"
+                    href="https://github.com/jorbush"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-black hover:opacity-70 dark:text-white"
@@ -13,7 +13,7 @@ export const Footer = () => {
                     <FaGithub size={24} />
                 </a>
                 <a
-                    href="mailto:your@email.com"
+                    href="mailto:jbonetv5@gmail.com"
                     className="text-black hover:opacity-70 dark:text-white"
                 >
                     <FaEnvelope size={24} />
