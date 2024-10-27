@@ -13,6 +13,10 @@ In "Amigo Invisible", participants are randomly assigned a person to whom they w
 
 In order to generate the assignments, we use the [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) algorithm.
 
+## Sending emails and Server-Sent Events (SSE)
+
+We use [Nodemailer](https://nodemailer.com/about/) to send emails and [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) to retrieve the status of the email sending process in real-time in the client.
+
 ## Requirements
 
 - [Node.js](https://nodejs.org/en/)
