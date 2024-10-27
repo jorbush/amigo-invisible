@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FaCheck, FaSpinner } from 'react-icons/fa';
 import { Participant, Supervisor } from '../types/types';
 import { MdDelete } from 'react-icons/md';
+import { IoInformationCircle } from 'react-icons/io5';
 
 export const ParticipantsTable = () => {
     const [participants, setParticipants] = useState<Participant[]>([]);
@@ -150,7 +151,16 @@ export const ParticipantsTable = () => {
                             }
                             className="rounded"
                         />
-                        Añadir supervisor (recibirá todas las asignaciones y no participa)
+                        Añadir supervisor
+                        <div className="relative group">
+                            <IoInformationCircle
+                                className="text-gray-800 dark:text-white hover:text-gray-700 hover:dark:text-neutral-200 cursor-help"
+                                size={15}
+                            />
+                            <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-48 p-2 bg-neutral-50 dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg">
+                                Recibirá todas las asignaciones y no participa
+                            </div>
+                        </div>
                     </label>
                 </div>
 
