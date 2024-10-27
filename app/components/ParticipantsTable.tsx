@@ -32,12 +32,12 @@ export const ParticipantsTable = () => {
             return;
         }
 
-        if (participants.some(p => p.name === name)) {
+        if (participants.some((p) => p.name === name)) {
             setError('El nombre ya está en uso');
             return;
         }
 
-        if (participants.some(p => p.email === email)) {
+        if (participants.some((p) => p.email === email)) {
             setError('El email ya está en uso');
             return;
         }
