@@ -29,7 +29,7 @@ We use [Next lint](https://nextjs.org/docs/basic-features/eslint) and [Oxlint](h
 
 ```bash
 npm run lint # Next lint
-npx run oxlint # Oxlint
+npx oxlint # Oxlint
 ```
 
 ## Format

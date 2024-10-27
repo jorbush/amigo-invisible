@@ -6,7 +6,7 @@ export function getRandomAssignments(
     const n = participants.length;
     if (n < 3) throw new Error('Se necesitan al menos 3 participantes');
     const available = Array.from({ length: n }, (_, i) => i);
-    const assignments: number[] = new Array(n).fill(-1);
+    const assignments: number[] = Array.from({ length: n }, () => -1);
     for (let i = 0; i < n; i++) {
         const validIndices = available.filter(
             (idx) => idx !== i && !assignments.includes(idx)
