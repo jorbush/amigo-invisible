@@ -150,7 +150,7 @@ export const ParticipantsTable = () => {
                             }
                             className="rounded"
                         />
-                        Añadir supervisor (recibirá todas las asignaciones)
+                        Añadir supervisor (recibirá todas las asignaciones y no participa)
                     </label>
                 </div>
 
