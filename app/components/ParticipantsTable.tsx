@@ -119,10 +119,9 @@ export const ParticipantsTable = () => {
         <div className="mx-auto w-full max-w-4xl p-4">
             <div className="mb-4">
                 <span className="relative text-black dark:text-white">
-                    Añade participantes y pulsa en &quot;Asignar
-                    Participantes&quot; para enviar los correos de asignación.
+                    Añade participantes y pulsa en &quot;Asignar&quot; para enviar los correos de asignación.
                     <span className="absolute -right-6 top-[calc(100%-1.2em)]">
-                        <Info text="Se requiere un mínimo de 3 participantes y un máximo de 35" />
+                        <Info text="Entre 3 y 35 participantes" />
                     </span>
                 </span>
             </div>
@@ -151,7 +150,7 @@ export const ParticipantsTable = () => {
                     </button>
                 </div>
 
-                <div className="mt-6">
+                <div className="mt-6 flex flex-row">
                     <label className="flex items-center gap-2 text-black dark:text-white">
                         <input
                             type="checkbox"
@@ -162,8 +161,11 @@ export const ParticipantsTable = () => {
                             className="rounded"
                         />
                         Añadir supervisor
-                        <Info text="Recibirá todas las asignaciones y no participa" />
+
                     </label>
+                    <div className="ml-1 mt-1 text-black dark:text-white">
+                        <Info text="Recibirá todas las asignaciones y no participa" />
+                    </div>
                 </div>
 
                 {showSupervisor && (
@@ -286,7 +288,7 @@ export const ParticipantsTable = () => {
                         disabled={participants.length < 3}
                         className="rounded bg-black px-6 py-2 text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-black"
                     >
-                        Asignar Participantes
+                        Asignar
                     </button>
                 </div>
             )}
