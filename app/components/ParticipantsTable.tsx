@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FaCheck, FaSpinner } from 'react-icons/fa';
 import { Participant, Supervisor } from '../types/types';
 import { MdDelete } from 'react-icons/md';
-import { IoInformationCircle } from 'react-icons/io5';
+import { Info } from './Info';
 
 export const ParticipantsTable = () => {
     const [participants, setParticipants] = useState<Participant[]>([]);
@@ -117,6 +117,15 @@ export const ParticipantsTable = () => {
 
     return (
         <div className="mx-auto w-full max-w-4xl p-4">
+            <div className='mb-4'>
+                <span className="text-black dark:text-white relative">
+                    Añade participantes y pulsa en "Asignar Participantes" para enviar los correos de asignación.
+                    <span className="absolute -right-6 top-[calc(100%-1.2em)]">
+                        <Info text="Se requiere un mínimo de 3 participantes y un máximo de 35" />
+                    </span>
+                </span>
+            </div>
+
             <div className="mb-8">
                 <div className="mb-4 flex flex-col gap-4 md:flex-row">
                     <input
@@ -152,15 +161,7 @@ export const ParticipantsTable = () => {
                             className="rounded"
                         />
                         Añadir supervisor
-                        <div className="group relative">
-                            <IoInformationCircle
-                                className="cursor-help text-gray-800 hover:text-gray-700 dark:text-white hover:dark:text-neutral-200"
-                                size={15}
-                            />
-                            <div className="absolute bottom-full left-1/2 mb-2 hidden w-48 -translate-x-1/2 rounded-lg bg-neutral-50 p-2 text-sm shadow-lg group-hover:block dark:bg-gray-800 dark:text-white">
-                                Recibirá todas las asignaciones y no participa
-                            </div>
-                        </div>
+                        <Info text="Recibirá todas las asignaciones y no participa" />
                     </label>
                 </div>
 
