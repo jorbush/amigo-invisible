@@ -9,4 +9,5 @@ export interface Participant {
 export interface Supervisor {
     name: string;
     email: string;
+    status: 'idle' | 'sending' | 'sent';
 }

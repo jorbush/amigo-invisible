@@ -71,7 +71,9 @@ export const ParticipantsTable = () => {
         setSupervisor({
             name: supervisorName,
             email: supervisorEmail,
+            status: 'idle',
         });
+
         setSupervisorName('');
         setSupervisorEmail('');
         setError('');
@@ -87,32 +89,47 @@ export const ParticipantsTable = () => {
             participants.map((p) => ({ ...p, status: 'sending' as const }))
         );
 
-        try {
-            const response = await fetch('/api/assign', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    participants,
-                    supervisor: supervisor || undefined,
-                }),
-            });
+        setError('');
 
-            if (!response.ok) throw new Error('Error al asignar participantes');
-
-            // const result = await response.json();
-
-            setParticipants(
-                participants.map((p) => ({ ...p, status: 'sent' as const }))
-            );
-        } catch (err) {
-            console.error('Error:', err);
-            setError('Error al enviar los correos');
-            setParticipants(
-                participants.map((p) => ({ ...p, status: 'idle' as const }))
-            );
+        if (supervisor) {
+            setSupervisor({ ...supervisor, status: 'sending' });
         }
+
+        const participantsParam = encodeURIComponent(
+            JSON.stringify(participants)
+        );
+        const supervisorParam = encodeURIComponent(JSON.stringify(supervisor));
+
+        const eventSource = new EventSource(
+            `/api/assign?participants=${participantsParam}&supervisor=${supervisorParam}`
+        );
+
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.participantId) {
+                setParticipants((prev) =>
+                    prev.map((p) =>
+                        p.id === data.participantId
+                            ? { ...p, status: data.status }
+                            : p
+                    )
+                );
+            } else if (data.supervisorStatus) {
+                setSupervisor((prev) =>
+                    prev ? { ...prev, status: data.supervisorStatus } : null
+                );
+            } else if (data.error) {
+                setError(data.error);
+                eventSource.close();
+            } else if (data.completed) {
+                eventSource.close();
+            }
+        };
+
+        eventSource.onerror = () => {
+            setError('Error en la conexión');
+            eventSource.close();
+        };
     };
 
     return (
@@ -266,7 +283,17 @@ export const ParticipantsTable = () => {
                                 <td className="p-2 text-black dark:text-white">
                                     {supervisor.email}
                                 </td>
-                                <td className="p-2 text-center">-</td>
+                                <td className="p-2 text-center">
+                                    {supervisor.status === 'sending' && (
+                                        <FaSpinner className="inline animate-spin text-black dark:text-white" />
+                                    )}
+                                    {supervisor.status === 'sent' && (
+                                        <FaCheck className="inline text-green-500" />
+                                    )}
+                                    {supervisor.status === 'idle' && (
+                                        <span className="text-gray-400">-</span>
+                                    )}
+                                </td>
                                 <td className="p-2 text-center">
                                     <button
                                         onClick={() => setSupervisor(null)}

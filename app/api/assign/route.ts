@@ -1,33 +1,45 @@
 import { NextResponse } from 'next/server';
-import { Participant } from '@/app/types/types';
 import nodemailer from 'nodemailer';
 import { getRandomAssignments } from '@/app/utils/utils';
+import { Participant } from '@/app/types/types';
 
-export async function POST(request: Request) {
-    try {
-        const { participants, supervisor } = await request.json();
-        const assignments = getRandomAssignments(participants);
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
-        });
-        for (const assignment of assignments) {
-            await transporter.sendMail({
-                from: '"Amigo Invisible" <amigoinvisibleservice@gmail.com>',
-                to: assignment.from.email,
-                subject: '¡Tu Amigo Invisible ha sido asignado!',
-                text: `¡Hola, ${assignment.from.name}!\nTe ha tocado regalar a: ${assignment.to.name}\n¡Que te diviertas eligiendo el regalo!`,
+export async function GET(request: Request) {
+    const { searchParams } = new URL(request.url);
+    const participants = JSON.parse(searchParams.get('participants') || '[]');
+    const supervisor = JSON.parse(searchParams.get('supervisor') || '{}');
+
+    const headers = new Headers({
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+    });
+
+    const stream = new ReadableStream({
+        async start(controller) {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS,
+                },
             });
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-        }
 
-        if (supervisor) {
-            const assignmentsTable = `
+            try {
+                const assignments = getRandomAssignments(participants);
+                for (const assignment of assignments) {
+                    await transporter.sendMail({
+                        from: '"Amigo Invisible" <amigoinvisibleservice@gmail.com>',
+                        to: assignment.from.email,
+                        subject: '¡Tu Amigo Invisible ha sido asignado!',
+                        text: `¡Hola, ${assignment.from.name}! Te ha tocado regalar a: ${assignment.to.name}`,
+                    });
+                    controller.enqueue(
+                        `data: ${JSON.stringify({ participantId: assignment.from.id, status: 'sent' })}\n\n`
+                    );
+                }
+
+                if (supervisor) {
+                    const assignmentsTable = `
           <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
               <tr style="background-color: #f3f4f6;">
@@ -56,25 +68,35 @@ export async function POST(request: Request) {
           </table>
         `;
 
-            await transporter.sendMail({
-                from: '"Amigo Invisible" <tu@email.com>',
-                to: supervisor.email,
-                subject: 'Asignaciones del Amigo Invisible',
-                html: `
+                    await transporter.sendMail({
+                        from: '"Amigo Invisible" <tu@email.com>',
+                        to: supervisor.email,
+                        subject: 'Asignaciones del Amigo Invisible',
+                        html: `
             <h2>Hola, ${supervisor.name}</h2>
             <p>Aquí tienes todas las asignaciones del Amigo Invisible:</p>
             ${assignmentsTable}
             <p style="margin-top: 20px;">Por favor, mantén esta información confidencial.</p>
           `,
-            });
-        }
+                    });
 
-        return NextResponse.json({ success: true });
-    } catch (error) {
-        console.error('Error:', error);
-        return NextResponse.json(
-            { error: 'Error al procesar la solicitud' },
-            { status: 500 }
-        );
-    }
+                    controller.enqueue(
+                        `data: ${JSON.stringify({ supervisorStatus: 'sent' })}\n\n`
+                    );
+                }
+                controller.enqueue(
+                    `data: ${JSON.stringify({ completed: true })}\n\n`
+                );
+                controller.close();
+            } catch (error) {
+                console.error('Error:', error);
+                controller.enqueue(
+                    `data: ${JSON.stringify({ error: 'Error al procesar la solicitud' })}\n\n`
+                );
+                controller.close();
+            }
+        },
+    });
+
+    return new NextResponse(stream, { headers });
 }
