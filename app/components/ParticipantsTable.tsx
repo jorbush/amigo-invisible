@@ -117,9 +117,10 @@ export const ParticipantsTable = () => {
 
     return (
         <div className="mx-auto w-full max-w-4xl p-4">
-            <div className='mb-4'>
-                <span className="text-black dark:text-white relative">
-                    Añade participantes y pulsa en "Asignar Participantes" para enviar los correos de asignación.
+            <div className="mb-4">
+                <span className="relative text-black dark:text-white">
+                    Añade participantes y pulsa en "Asignar Participantes" para
+                    enviar los correos de asignación.
                     <span className="absolute -right-6 top-[calc(100%-1.2em)]">
                         <Info text="Se requiere un mínimo de 3 participantes y un máximo de 35" />
                     </span>

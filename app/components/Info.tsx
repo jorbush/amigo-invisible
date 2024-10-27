@@ -1,5 +1,5 @@
 'use client';
-import { IoInformationCircle } from "react-icons/io5";
+import { IoInformationCircle } from 'react-icons/io5';
 
 interface InfoProps {
     text: string;
