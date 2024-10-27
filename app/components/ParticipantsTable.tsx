@@ -119,7 +119,8 @@ export const ParticipantsTable = () => {
         <div className="mx-auto w-full max-w-4xl p-4">
             <div className="mb-4">
                 <span className="relative text-black dark:text-white">
-                    Añade participantes y pulsa en &quot;Asignar&quot; para enviar los correos de asignación.
+                    Añade participantes y pulsa en &quot;Asignar&quot; para
+                    enviar los correos de asignación.
                     <span className="absolute -right-6 top-[calc(100%-1.2em)]">
                         <Info text="Entre 3 y 35 participantes" />
                     </span>
@@ -161,7 +162,6 @@ export const ParticipantsTable = () => {
                             className="rounded"
                         />
                         Añadir supervisor
-
                     </label>
                     <div className="ml-1 mt-1 text-black dark:text-white">
                         <Info text="Recibirá todas las asignaciones y no participa" />
