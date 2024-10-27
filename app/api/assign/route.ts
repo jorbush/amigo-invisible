@@ -1,21 +1,12 @@
 import { NextResponse } from 'next/server';
 import { Participant } from '@/app/types/types';
 import nodemailer from 'nodemailer';
+import { getRandomAssignments } from '@/app/utils/utils';
 
 export async function POST(request: Request) {
     try {
         const { participants, supervisor } = await request.json();
-        const shuffled = [...participants];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        const assignments = participants.map(
-            (participant: Participant, index: number) => ({
-                from: participant,
-                to: shuffled[(index + 1) % shuffled.length],
-            })
-        );
+        const assignments = getRandomAssignments(participants);
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             port: 587,
