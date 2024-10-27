@@ -30,7 +30,7 @@ export async function POST(request: Request) {
                 from: '"Amigo Invisible" <amigoinvisibleservice@gmail.com>',
                 to: assignment.from.email,
                 subject: '¡Tu Amigo Invisible ha sido asignado!',
-                text: `¡Hola ${assignment.from.name}!\nTe ha tocado regalar a: ${assignment.to.name}\n¡Que te diviertas eligiendo el regalo!`,
+                text: `¡Hola, ${assignment.from.name}!\nTe ha tocado regalar a: ${assignment.to.name}\n¡Que te diviertas eligiendo el regalo!`,
             });
             await new Promise((resolve) => setTimeout(resolve, 1000));
         }
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
                 to: supervisor.email,
                 subject: 'Asignaciones del Amigo Invisible',
                 html: `
-            <h2>Hola ${supervisor.name}</h2>
+            <h2>Hola, ${supervisor.name}</h2>
             <p>Aquí tienes todas las asignaciones del Amigo Invisible:</p>
             ${assignmentsTable}
             <p style="margin-top: 20px;">Por favor, mantén esta información confidencial.</p>
