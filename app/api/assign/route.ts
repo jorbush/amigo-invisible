@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer';
 import { getRandomAssignments } from '@/app/utils/utils';
 import { Participant } from '@/app/types/types';
 
-const BATCH_SIZE = 5;
-const BATCH_DELAY_MS = 2000;
+const BATCH_SIZE = 2;
+const BATCH_DELAY_MS = 5000;
 
 async function sendBatchEmails(
     transporter: nodemailer.Transporter,
