@@ -28,8 +28,8 @@ export const ParticipantsTable = () => {
             return;
         }
 
-        if (participants.length >= 35) {
-            setError('Máximo 35 participantes');
+        if (participants.length >= 6) {
+            setError('Máximo 6 participantes');
             return;
         }
 
@@ -139,7 +139,7 @@ export const ParticipantsTable = () => {
                     Añade participantes y pulsa en &quot;Asignar&quot; para
                     enviar los correos de asignación.
                     <span className="absolute -right-6 top-[calc(100%-1.2em)]">
-                        <Info text="Entre 3 y 35 participantes" />
+                        <Info text="Entre 3 y 6 participantes" />
                     </span>
                 </span>
             </div>
